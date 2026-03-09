@@ -1,0 +1,194 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% block title %}Shop | Artist Gallery{% endblock %}
+    {% block extra_css %}
+            <style>
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .shop-card {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(255, 159, 176, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding-bottom: 1.5rem;
+        }
+
+        .shop-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(255, 159, 176, 0.3);
+        }
+
+                .shop-card .painting-info {
+            padding: 1.8rem 1.5rem 0 1.5rem;
+        }
+
+        .shop-price {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 0.5rem 0;
+            text-shadow: 1px 1px 2px rgba(255, 159, 176, 0.2);
+        }
+
+        .shop-options {
+            margin-bottom: 1.5rem;
+        }
+
+        .shop-options select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(255, 159, 176, 0.1);
+        }
+        
+        .shop-options select:hover, .shop-options select:focus {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: var(--accent-color);
+        }
+
+        .buy-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 159, 176, 0.3);
+        }
+        
+        .buy-btn:hover {
+            box-shadow: 0 8px 25px rgba(255, 159, 176, 0.5);
+            transform: scale(1.05);
+        }
+    </style>
+    {% endblock %}
+
+</head>
+<body>
+    {% block content %}
+    <!-- Main Content -->
+    <main class="section container">
+        <div class="text-center fade-in-up">
+            <h1 class="section-title">Shop Artworks</h1>
+            <p class="section-subtitle">Take a piece of my pastel world home with you <i class="fa-solid fa-bag-shopping" style="color: var(--accent-color);"></i></p>
+        </div>
+
+        <div class="shop-grid">
+            <!-- Shop Item 1 -->
+            <article class="card shop-card fade-in-up">
+                <div class="painting-img-wrapper" style="border-bottom: 3px solid rgba(255, 182, 193, 0.4);">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pink Cloud Dreams">
+                </div>
+                <div class="painting-info">
+                    <h3 class="painting-title">Pink Cloud Dreams</h3>
+                    <p class="painting-desc" style="margin-bottom: 0;">Acrylic on canvas</p>
+                    <div class="shop-price">$120.00</div>
+                    
+                    <div class="shop-options">
+                        <select aria-label="Purchase Format Option">
+                            <option value="physical">Physical Original ($120.00)</option>
+                            <option value="digital">Digital Print File ($15.00)</option>
+                            <option value="framed">Framed Print ($45.00)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary buy-btn" onclick="alert('Added to your dreamy cart! ')">
+                        <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                    </button>
+                </div>
+            </article>
+
+            <!-- Shop Item 2 -->
+            <article class="card shop-card fade-in-up">
+                <div class="painting-img-wrapper" style="border-bottom: 3px solid rgba(255, 182, 193, 0.4);">
+                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Soft Botanicals">
+                </div>
+                <div class="painting-info">
+                    <h3 class="painting-title">Soft Botanicals</h3>
+                    <p class="painting-desc" style="margin-bottom: 0;">Watercolor study</p>
+                    <div class="shop-price">$85.00</div>
+                    
+                    <div class="shop-options">
+                        <select aria-label="Purchase Format Option">
+                            <option value="physical">Physical Original ($85.00)</option>
+                            <option value="digital">Digital Print File ($15.00)</option>
+                            <option value="framed">Framed Print ($40.00)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary buy-btn" onclick="alert('Added to your dreamy cart! ')">
+                        <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                    </button>
+                </div>
+            </article>
+
+            <!-- Shop Item 3 -->
+            <article class="card shop-card fade-in-up">
+                <div class="painting-img-wrapper" style="border-bottom: 3px solid rgba(255, 182, 193, 0.4);">
+                    <img src="https://images.unsplash.com/photo-1510425463958-dcced8bd7702?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Morning Tea">
+                </div>
+                <div class="painting-info">
+                    <h3 class="painting-title">Morning Tea</h3>
+                    <p class="painting-desc" style="margin-bottom: 0;">Gouache painting</p>
+                    <div class="shop-price">$95.00</div>
+                    
+                    <div class="shop-options">
+                        <select aria-label="Purchase Format Option">
+                            <option value="physical">Physical Original ($95.00)</option>
+                            <option value="digital">Digital Print File ($15.00)</option>
+                            <option value="framed">Framed Print ($42.00)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary buy-btn" onclick="alert('Added to your dreamy cart! ')">
+                        <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                    </button>
+                </div>
+            </article>
+        </div>
+    </main>
+    {% endblock %}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

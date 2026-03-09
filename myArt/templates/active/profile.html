@@ -1,0 +1,95 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Profile | Artist Gallery{% endblock %}</title>
+</head>
+<body>
+    
+    {% block content %}
+    <!-- Main Content -->
+    <main class="section container">
+        
+        <!-- Profile Header -->
+        <div class="profile-header fade-in-up">
+            <div class="profile-avatar">AM</div>
+            <div>
+                <h1 style="margin-bottom: 0.2rem; font-size: 2.2rem;">Anna Marie</h1>
+                <p class="text-muted" style="font-size: 1.1rem; margin-bottom: 1rem;">anna.marie@example.com</p>
+                <a href="login.html" class="btn btn-secondary btn-icon" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+                </a>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 4rem; flex-wrap: wrap;">
+            
+            <!-- Liked Artworks Column -->
+            <div style="flex: 1; min-width: 300px;" class="fade-in-up">
+                <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 2rem;">My Favorites ❤️</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="card painting-card">
+                        <div class="painting-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Soft Botanicals">
+                        </div>
+                        <div class="painting-info">
+                            <h4 style="margin-bottom: 0;">Soft Botanicals</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="card painting-card">
+                        <div class="painting-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1518640166948-52fb3ee0d8b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Cotton Candy Waves">
+                        </div>
+                        <div class="painting-info">
+                            <h4 style="margin-bottom: 0;">Cotton Candy Waves</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order History Column -->
+            <div style="flex: 1; min-width: 300px;" class="fade-in-up" style="transition-delay: 0.2s;">
+                <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 2rem;">Order History 🛍️</h2>
+                
+                <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem; border: 2px solid var(--primary-color-dark);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px dashed var(--accent-color); padding-bottom: 0.5rem;">
+                        <strong>Order #8294</strong>
+                        <span class="text-muted">Oct 12, 2025</span>
+                    </div>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Pink Cloud Dreams" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--border-radius-sm);">
+                        <div>
+                            <h5 style="margin-bottom: 0.2rem;">Pink Cloud Dreams (Digital Print)</h5>
+                            <p style="color: var(--accent-color); font-weight: bold;">$15.00</p>
+                        </div>
+                        <button class="btn btn-secondary" style="margin-left: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card" style="padding: 1.5rem;">
+                    <div style="text-align: center; color: var(--text-muted); padding: 1rem 0;">
+                        <i class="fa-solid fa-box-open" style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color-dark);"></i>
+                        <p>No other recent orders.</p>
+                        <a href="shop.html" class="btn btn-primary" style="margin-top: 1rem;">Browse Shop</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    {% endblock %}
+
+
+</body>
+</html>
+
+
+
+

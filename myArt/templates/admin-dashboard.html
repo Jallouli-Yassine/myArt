@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Gallery | Admin Dashboard</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .admin-sidebar {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .admin-sidebar a {
+            padding: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        .admin-sidebar a:hover, .admin-sidebar a.active {
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        .admin-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(255, 159, 176, 0.1);
+        }
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .recent-activity {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 20px;
+        }
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="starry-night-bg">
+        <div class="swirl swirl-1"></div>
+        <div class="swirl swirl-2"></div>
+        <div class="swirl swirl-3"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="floating-heart"><i class="fa-solid fa-heart"></i></div>
+        <div class="floating-heart"><i class="fa-solid fa-heart"></i></div>
+        <div class="floating-heart"><i class="fa-solid fa-heart"></i></div>
+        <div class="floating-heart"><i class="fa-solid fa-heart"></i></div>
+    </div>
+
+    <main class="admin-layout">
+        <aside class="admin-sidebar">
+            <div style="margin-bottom: 2rem; text-align: center;">
+                <a href="index.html" class="logo" style="justify-content: center; font-size: 1.8rem;">ArtistGallery <i class="fa-solid fa-palette" style="font-size: 0.8em; margin-left: 2px;"></i></a>
+            </div>
+            <a href="admin-dashboard.html" class="active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+            <a href="admin-paintings.html"><i class="fa-solid fa-paint-brush"></i> Manage Paintings</a>
+            <a href="admin-users.html"><i class="fa-solid fa-users"></i> Manage Users</a>
+            <a href="admin-orders.html"><i class="fa-solid fa-receipt"></i> Orders & Sales</a>
+            <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Shop</a>
+                <a href="login.html" style="color: #ffafcc;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <section class="admin-content container">
+            <h1 style="margin-bottom: 2rem;">Overview</h1>
+            
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <i class="fa-solid fa-heart"></i>
+                    <h3>1,245</h3>
+                    <p>Total Likes</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <h3>156</h3>
+                    <p>Paintings Sold</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>3,420</h3>
+                    <p>Registered Lovers</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-palette"></i>
+                    <h3>42</h3>
+                    <p>Active Artworks</p>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h2 style="margin-bottom: 1rem;">Recent Activity</h2>
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <div>
+                        <p><strong>Sophie</strong> purchased <em>"Starry Blossoms"</em> for $450.</p>
+                        <small class="text-muted">2 hours ago</small>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: var(--accent-color);"><i class="fa-solid fa-heart"></i></div>
+                    <div>
+                        <p><strong>Emma</strong> loved <em>"Pastel Dreams"</em>.</p>
+                        <small class="text-muted">4 hours ago</small>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: #a2d2ff;"><i class="fa-solid fa-user-plus"></i></div>
+                    <div>
+                        <p><strong>Oliver</strong> created a new account.</p>
+                        <small class="text-muted">5 hours ago</small>
+                    </div>
+                </div>
+                 <div class="activity-item">
+                    <div class="activity-icon" style="background: #cdb4db;"><i class="fa-regular fa-comment"></i></div>
+                    <div>
+                        <p><strong>Lucas</strong> commented "So dreamy!" on <em>"Moonlight"</em>.</p>
+                        <small class="text-muted">1 day ago</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+

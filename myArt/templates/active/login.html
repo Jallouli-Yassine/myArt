@@ -1,0 +1,51 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Login | Artist Gallery{% endblock %}</title>
+
+</head>
+<body>
+
+        {% block content %}
+    <!-- Main Content -->
+    <main class="section container text-center">
+        <div class="auth-container fade-in-up">
+            <h1 class="section-title" style="margin-bottom: 2rem;">Welcome Back 🌸</h1>
+            
+            <div class="auth-card">
+                <form action="profile.html" method="GET">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="hello@example.com" required>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 0.5rem;">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    
+                    <div style="text-align: right; margin-bottom: 2rem;">
+                        <a href="#" style="font-size: 0.9rem; color: var(--text-muted);">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
+                    
+                    <p style="margin-top: 1.5rem; color: var(--text-muted);">
+                        Don't have an account? <a href="{% url 'register' %}" style="color: var(--accent-color); font-weight: bold;">Sign Up</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+    {% endblock %}
+
+</body>
+</html>
+
+
+
+

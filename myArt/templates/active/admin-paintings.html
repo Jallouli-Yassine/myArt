@@ -1,0 +1,129 @@
+{% extends '_dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Manage Paintings | Admin Panel{% endblock %}
+
+{% block nav_paintings %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .admin-table-container {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        overflow-x: auto;
+        box-shadow: 0 8px 32px rgba(255, 159, 176, 0.1);
+    }
+    .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .admin-table th, .admin-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        vertical-align: middle;
+    }
+    .admin-table th {
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+    .admin-table tr:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    .action-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        margin-right: 0.5rem;
+        transition: color 0.3s;
+    }
+    .action-btn.edit:hover { color: #a2d2ff; }
+    .action-btn.delete:hover { color: #ffafcc; }
+    .painting-thumb {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid white;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .status-badge {
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    .status-available { background: #bde0fe; color: #023e8a; }
+    .status-sold { background: #ffc8dd; color: #800f2f; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="fade-in-up">
+    <div class="admin-header">
+        <h1>Manage Paintings</h1>
+        <a href="{% url 'admin_add_painting' %}" class="btn" style="text-decoration: none;"><i class="fa-solid fa-plus"></i> Add New Painting</a>
+    </div>
+    
+    <div class="admin-table-container">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Preview</th>
+                    <th>Art Title</th>
+                    <th>Price</th>
+                    <th>Likes ❤️</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=200" alt="Art" class="painting-thumb"></td>
+                    <td><strong>Starry Blossoms</strong></td>
+                    <td>$450.00</td>
+                    <td>342</td>
+                    <td><span class="status-badge status-sold">Sold</span></td>
+                    <td>
+                        <button class="action-btn edit" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-btn delete" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="https://images.unsplash.com/photo-1544413660-f13d80ee625b?auto=format&fit=crop&q=80&w=200" alt="Art" class="painting-thumb"></td>
+                    <td><strong>Pastel Dreams</strong></td>
+                    <td>$320.00</td>
+                    <td>128</td>
+                    <td><span class="status-badge status-available">Available</span></td>
+                    <td>
+                        <button class="action-btn edit" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-btn delete" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="https://images.unsplash.com/photo-1580136608260-4eb11f4b24fe?auto=format&fit=crop&q=80&w=200" alt="Art" class="painting-thumb"></td>
+                    <td><strong>Moonlight Whispers</strong></td>
+                    <td>$500.00</td>
+                    <td>512</td>
+                    <td><span class="status-badge status-available">Available</span></td>
+                    <td>
+                        <button class="action-btn edit" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-btn delete" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

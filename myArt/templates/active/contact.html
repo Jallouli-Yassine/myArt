@@ -1,0 +1,140 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Contact | Artist Gallery{% endblock %}</title>
+
+    <meta name="description" content="Get in touch with the artist.">
+
+        {% block extra_css %}
+            <style>
+        /* Contact Specific Styles */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .contact-card {
+            background-color: white;
+            border-radius: var(--border-radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-hover);
+            border: 4px solid var(--primary-color);
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--primary-color-dark);
+            border-radius: var(--border-radius-md);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: all var(--transition-fast);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.3); /* Soft Glow */
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .contact-decorations i {
+            position: absolute;
+            color: var(--primary-color-dark);
+            opacity: 0.5;
+            z-index: 1;
+            font-size: 3rem;
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        .decor-1 { top: -20px; left: -30px; animation-delay: 0s !important; }
+        .decor-2 { bottom: 40px; right: -40px; font-size: 4rem !important; animation-delay: 2s !important; }
+
+        @media (max-width: 600px) {
+            .contact-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+        {% endblock %}
+
+
+</head>
+<body>
+    {% block content %}
+    <!-- Main Content -->
+    <main class="section container text-center">
+        <div class="fade-in-up mb-4">
+            <h1 class="section-title">Let's Connect</h1>
+            <p class="section-subtitle">Have a question or want to commission a piece? Send me a sweet message!</p>
+        </div>
+
+        <div class="contact-container fade-in-up" style="transition-delay: 0.2s;">
+            <div class="contact-decorations">
+                <i class="fa-solid fa-heart decor-1"></i>
+                <i class="fa-solid fa-paintbrush decor-2"></i>
+            </div>
+            
+            <form class="contact-card" action="#" method="POST" onsubmit="event.preventDefault(); alert('Yay! Message sent successfully. 🌸');">
+                <div class="form-group">
+                    <label for="name" class="form-label">Your Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Your Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea id="message" name="message" class="form-control" placeholder="Write your sweet message here..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary submit-btn">Send Message <i class="fa-regular fa-paper-plane" style="margin-left: 5px;"></i></button>
+            </form>
+        </div>
+    </main>
+    {% endblock %}
+
+
+</body>
+</html>
+
+
+
+

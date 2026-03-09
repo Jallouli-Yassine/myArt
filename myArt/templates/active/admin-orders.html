@@ -1,0 +1,157 @@
+{% extends '_dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Orders & Sales | Admin Panel{% endblock %}
+
+{% block nav_orders %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .admin-table-container {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        overflow-x: auto;
+        box-shadow: 0 8px 32px rgba(255, 159, 176, 0.1);
+    }
+    .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .admin-table th, .admin-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        vertical-align: middle;
+    }
+    .admin-table th {
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+    .admin-table tr:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    .action-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        margin-right: 0.5rem;
+        transition: color 0.3s;
+    }
+    .action-btn.view:hover { color: #a2d2ff; }
+    .action-btn.update:hover { color: #ffafcc; }
+    
+    .status-badge {
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        display: inline-block;
+        text-align: center;
+    }
+    .status-pending { background: #ffe5d9; color: #d08c60; }
+    .status-shipped { background: #e0aaff; color: #5a189a; }
+    .status-delivered { background: #bde0fe; color: #023e8a; }
+    
+    .order-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .order-thumb {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 1px solid white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="fade-in-up">
+    <div class="admin-header">
+        <h1>Orders & Sales</h1>
+        <button class="btn"><i class="fa-solid fa-download"></i> Export Data</button>
+    </div>
+    
+    <div class="admin-table-container">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Item Purchased</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>#PTG-9304</strong></td>
+                    <td>Sophie L.</td>
+                    <td>
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=100" alt="Art" class="order-thumb">
+                            Starry Blossoms
+                        </div>
+                    </td>
+                    <td>Oct 15, 2023</td>
+                    <td>$450.00</td>
+                    <td><span class="status-badge status-pending">Pending</span></td>
+                    <td>
+                        <button class="action-btn view" title="View Invoice"><i class="fa-solid fa-file-invoice"></i></button>
+                        <button class="action-btn update" title="Update Status"><i class="fa-solid fa-truck-fast"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#PTG-8821</strong></td>
+                    <td>Liam ArtFan</td>
+                    <td>
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1544413660-f13d80ee625b?auto=format&fit=crop&q=80&w=100" alt="Art" class="order-thumb">
+                            Pastel Dreams
+                        </div>
+                    </td>
+                    <td>Oct 10, 2023</td>
+                    <td>$320.00</td>
+                    <td><span class="status-badge status-shipped">Shipped</span></td>
+                    <td>
+                        <button class="action-btn view" title="View Invoice"><i class="fa-solid fa-file-invoice"></i></button>
+                        <button class="action-btn update" title="Update Status"><i class="fa-solid fa-truck-fast"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#PTG-7502</strong></td>
+                    <td>Oliver S.</td>
+                    <td>
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1580136608260-4eb11f4b24fe?auto=format&fit=crop&q=80&w=100" alt="Art" class="order-thumb">
+                            Moonlight Whispers
+                        </div>
+                    </td>
+                    <td>Sep 28, 2023</td>
+                    <td>$500.00</td>
+                    <td><span class="status-badge status-delivered">Delivered</span></td>
+                    <td>
+                        <button class="action-btn view" title="View Invoice"><i class="fa-solid fa-file-invoice"></i></button>
+                        <button class="action-btn update" title="Update Status"><i class="fa-solid fa-truck-fast"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

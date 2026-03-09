@@ -1,0 +1,149 @@
+{% extends '_dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Manage Users | Admin Panel{% endblock %}
+
+{% block nav_users %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .admin-table-container {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        overflow-x: auto;
+        box-shadow: 0 8px 32px rgba(255, 159, 176, 0.1);
+    }
+    .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .admin-table th, .admin-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        vertical-align: middle;
+    }
+    .admin-table th {
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+    .admin-table tr:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    .action-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        margin-right: 0.5rem;
+        transition: color 0.3s;
+    }
+    .action-btn.view:hover { color: #a2d2ff; }
+    .action-btn.ban:hover { color: #ffafcc; }
+    
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        border: 2px solid white;
+    }
+    .status-badge {
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    .status-active { background: #bde0fe; color: #023e8a; }
+    .status-banned { background: #ffc8dd; color: #800f2f; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="fade-in-up">
+    <div class="admin-header">
+        <h1>Manage Users</h1>
+    </div>
+    
+    <div class="admin-table-container">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Email Address</th>
+                    <th>Join Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar" style="background: #ffb5a7;"><i class="fa-solid fa-user"></i></div>
+                            <strong>Sophie L.</strong>
+                        </div>
+                    </td>
+                    <td>sophie.lover@example.com</td>
+                    <td>Oct 12, 2023</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td>
+                        <button class="action-btn view" title="View Profile / Activity"><i class="fa-solid fa-eye"></i></button>
+                        <button class="action-btn ban" title="Ban User"><i class="fa-solid fa-ban"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar" style="background: #a2d2ff;"><i class="fa-solid fa-user"></i></div>
+                            <strong>Liam ArtFan</strong>
+                        </div>
+                    </td>
+                    <td>liam.art@example.com</td>
+                    <td>Nov 05, 2023</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td>
+                        <button class="action-btn view" title="View Profile / Activity"><i class="fa-solid fa-eye"></i></button>
+                        <button class="action-btn ban" title="Ban User"><i class="fa-solid fa-ban"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar" style="background: #cdb4db;"><i class="fa-solid fa-user-slash"></i></div>
+                            <strong style="color: var(--text-muted); text-decoration: line-through;">Spammer99</strong>
+                        </div>
+                    </td>
+                    <td>spam.bot@example.com</td>
+                    <td>Dec 01, 2023</td>
+                    <td><span class="status-badge status-banned">Banned</span></td>
+                    <td>
+                        <button class="action-btn view" title="View Profile / Activity"><i class="fa-solid fa-eye"></i></button>
+                        <button class="action-btn" style="color: #bde0fe;" title="Unban User"><i class="fa-solid fa-check-circle"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

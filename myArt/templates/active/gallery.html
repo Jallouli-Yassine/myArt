@@ -1,0 +1,289 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{% block title %}Gallery | Artist Gallery{% endblock %}</title>
+
+    <meta name="description" content="Browse my painting portfolio.">
+    {% block extra_css %}
+        <style>
+        /* Gallery Specific Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .painting-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .painting-img-wrapper {
+            position: relative;
+            padding-top: 100%; /* 1:1 Aspect Ratio */
+            overflow: hidden;
+            border-bottom: 3px solid var(--accent-color);
+            border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+        }
+
+        .painting-img-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+        }
+
+        .painting-card:hover .painting-img-wrapper img {
+            transform: scale(1.08) rotate(1deg);
+            filter: contrast(1.1) saturate(1.1);
+        }
+
+        .painting-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .painting-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .painting-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .painting-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed var(--primary-color-dark);
+            padding-top: 1rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+
+        .action-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .jadore-btn i {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .jadore-btn.liked {
+            color: #ff477e; /* Pop of pink/red for love */
+        }
+        
+        .jadore-btn.liked i {
+            transform: scale(1.2);
+            color: #ff477e;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--border-radius-pill);
+            border: 2px solid var(--primary-color-dark);
+            background: white;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+        }
+    </style>
+    {% endblock %}
+
+</head>
+<body>
+    {% block content %}
+
+    <!-- Main Content -->
+    <main class="section container">
+        <div class="text-center fade-in-up">
+            <h1 class="section-title">My Artworks</h1>
+            <p class="section-subtitle">A collection of soft colors and dreamy scenes</p>
+        </div>
+
+        <!-- Optional Filter (for UI complete feel) -->
+        <div class="category-filter fade-in-up">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Landscapes</button>
+            <button class="filter-btn">Portraits</button>
+            <button class="filter-btn">Abstract</button>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- Item 1 -->
+            <article class="card painting-card fade-in-up">
+                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pink Cloud Dreams">
+                </a>
+                <div class="painting-info">
+                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Pink Cloud Dreams</h3></a>
+                    <p class="painting-desc">Acrylic on canvas. Exploring the softness of twilight skies.</p>
+                    <div class="painting-actions">
+                        <button class="action-btn jadore-btn">
+                            <i class="fa-regular fa-heart"></i> J'adore
+                        </button>
+                        <button class="action-btn comment-btn" aria-label="Leave a comment">
+                            <i class="fa-regular fa-comment"></i> 12
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="card painting-card fade-in-up">
+                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
+                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Soft Botanicals">
+                </a>
+                <div class="painting-info">
+                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Soft Botanicals</h3></a>
+                    <p class="painting-desc">Watercolor study of spring flora blooming in the morning sun.</p>
+                    <div class="painting-actions">
+                        <button class="action-btn jadore-btn">
+                            <i class="fa-regular fa-heart"></i> J'adore
+                        </button>
+                        <button class="action-btn comment-btn" aria-label="Leave a comment">
+                            <i class="fa-regular fa-comment"></i> 5
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article class="card painting-card fade-in-up">
+                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
+                    <img src="https://images.unsplash.com/photo-1510425463958-dcced8bd7702?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Morning Tea">
+                </a>
+                <div class="painting-info">
+                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Morning Tea</h3></a>
+                    <p class="painting-desc">A gouache piece capturing the warmth of a quiet morning.</p>
+                    <div class="painting-actions">
+                        <button class="action-btn jadore-btn">
+                            <i class="fa-regular fa-heart"></i> J'adore
+                        </button>
+                        <button class="action-btn comment-btn" aria-label="Leave a comment">
+                            <i class="fa-regular fa-comment"></i> 8
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Item 4 -->
+            <article class="card painting-card fade-in-up">
+                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
+                    <img src="https://images.unsplash.com/photo-1456086272160-b28b0645b729?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Abstract Bloom">
+                </a>
+                <div class="painting-info">
+                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Abstract Bloom</h3></a>
+                    <p class="painting-desc">Mixed media on wood block prioritizing texture and flow.</p>
+                    <div class="painting-actions">
+                        <button class="action-btn jadore-btn">
+                            <i class="fa-regular fa-heart"></i> J'adore
+                        </button>
+                        <button class="action-btn comment-btn" aria-label="Leave a comment">
+                            <i class="fa-regular fa-comment"></i> 24
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Item 5 -->
+            <article class="card painting-card fade-in-up">
+                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
+                    <img src="https://images.unsplash.com/photo-1518640166948-52fb3ee0d8b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cotton Candy Waves">
+                </a>
+                <div class="painting-info">
+                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Cotton Candy Waves</h3></a>
+                    <p class="painting-desc">Oil painting blending serene ocean vibes with sweet pastels.</p>
+                    <div class="painting-actions">
+                        <button class="action-btn jadore-btn">
+                            <i class="fa-regular fa-heart"></i> J'adore
+                        </button>
+                        <button class="action-btn comment-btn" aria-label="Leave a comment">
+                            <i class="fa-regular fa-comment"></i> 3
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Item 6 -->
+            <article class="card painting-card fade-in-up">
+                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
+                    <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pastel Dreams">
+                </a>
+                <div class="painting-info">
+                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Pastel Dreams</h3></a>
+                    <p class="painting-desc">Soft brushstrokes creating a dreamy, abstract atmosphere.</p>
+                    <div class="painting-actions">
+                        <button class="action-btn jadore-btn">
+                            <i class="fa-regular fa-heart"></i> J'adore
+                        </button>
+                        <button class="action-btn comment-btn" aria-label="Leave a comment">
+                            <i class="fa-regular fa-comment"></i> 15
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+    {% endblock %}
+
+</body>
+</html>
+
+
+
+
+
+
+
+

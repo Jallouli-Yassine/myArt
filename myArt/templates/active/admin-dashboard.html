@@ -1,0 +1,99 @@
+{% extends '_dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Dashboard Overview | Artist Gallery{% endblock %}
+
+{% block nav_dash %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+    .admin-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    .stat-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.3s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+    .recent-activity {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+    .activity-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="fade-in-up">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h2 class="section-title" style="margin-bottom: 0;">Overview</h2>
+        <p class="text-muted">Welcome back, Admin! ✨</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="admin-stats">
+        <div class="stat-card">
+            <i class="fa-solid fa-images" style="font-size: 2rem; color: #a2d2ff; margin-bottom: 1rem;"></i>
+            <h3>Total Paintings</h3>
+            <p style="font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem;">24</p>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-cart-shopping" style="font-size: 2rem; color: #ffafcc; margin-bottom: 1rem;"></i>
+            <h3>Total Orders</h3>
+            <p style="font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem;">15</p>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-users" style="font-size: 2rem; color: #bde0fe; margin-bottom: 1rem;"></i>
+            <h3>Active Users</h3>
+            <p style="font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem;">89</p>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-sack-dollar" style="font-size: 2rem; color: #cdb4db; margin-bottom: 1rem;"></i>
+            <h3>Revenue</h3>
+            <p style="font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem;">$1,240</p>
+        </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="recent-activity">
+        <h3>Recent Activity 🌸</h3>
+        <div style="margin-top: 1.5rem;">
+            <div class="activity-item">
+                <i class="fa-solid fa-cart-plus" style="background: white; padding: 1rem; border-radius: 50%; color: #ffafcc;"></i>
+                <div>
+                    <strong>New Order #1042</strong>
+                    <p class="text-muted" style="margin: 0; font-size: 0.9rem;">"Sunset Dreams" was purchased</p>
+                </div>
+                <span class="text-muted" style="margin-left: auto; font-size: 0.8rem;">2 hours ago</span>
+            </div>
+            <div class="activity-item">
+                <i class="fa-solid fa-user-plus" style="background: white; padding: 1rem; border-radius: 50%; color: #a2d2ff;"></i>
+                <div>
+                    <strong>New User Registered</strong>
+                    <p class="text-muted" style="margin: 0; font-size: 0.9rem;">Sarah joined the gallery</p>
+                </div>
+                <span class="text-muted" style="margin-left: auto; font-size: 0.8rem;">5 hours ago</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
