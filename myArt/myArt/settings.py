@@ -1,4 +1,4 @@
-import dj_database_url
+﻿import dj_database_url
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-j66qrm6#rv@b#+ehlllo)idbx2nt3h3a%_oo5s%@&dunlvmn@*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*', '.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
