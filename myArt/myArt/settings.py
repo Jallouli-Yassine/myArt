@@ -1,4 +1,7 @@
 import dj_database_url
+import pymysql
+pymysql.install_as_MySQLdb()
+
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -141,6 +144,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 import dj_database_url
+import pymysql
+pymysql.install_as_MySQLdb()
+
 import os
 from dotenv import load_dotenv
 load_dotenv()
