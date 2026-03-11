@@ -1,0 +1,111 @@
+{% extends '_dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Add Painting | Admin Panel{% endblock %}
+
+{% block nav_add_painting %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-hover);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .form-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+    }
+    .form-control {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.5);
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: var(--accent-color);
+        background: white;
+    }
+    textarea.form-control {
+        resize: vertical;
+        min-height: 120px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="fade-in-up">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h2 class="section-title" style="margin-bottom: 0;">Edit Painting 🎨</h2>
+    </div>
+
+    <!-- Painting Upload Form -->
+    <div class="form-card">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label class="form-label">Painting Title</label>
+                <input type="text" name="title" class="form-control" required value="{{ painting.title }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Story / Description</label>
+                <textarea name="description" class="form-control" required>{{ painting.description }}</textarea>
+            </div>
+
+            <div style="display: flex; gap: 1.5rem;">
+                <div class="form-group" style="flex: 1;">
+                    <label class="form-label">Price ($)</label>
+                    <input type="number" name="price" class="form-control" required value="{{ painting.price }}">
+                </div>
+                
+                <div class="form-group" style="flex: 1;">
+                    <label class="form-label">Medium / Category</label>
+                    <select name="category" class="form-control">
+    <option value="oil" {% if painting.category == 'oil' %}selected{% endif %}>Oil on Canvas</option>
+    <option value="watercolor" {% if painting.category == 'watercolor' %}selected{% endif %}>Watercolor</option>
+    <option value="acrylic" {% if painting.category == 'acrylic' %}selected{% endif %}>Acrylic</option>
+    <option value="digital" {% if painting.category == 'digital' %}selected{% endif %}>Digital Art</option>
+    <option value="mixed" {% if painting.category == 'mixed' %}selected{% endif %}>Mixed Media</option>
+</select>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 1rem;">
+                <label class="form-label">Upload New Image (Leave blank to keep existing)</label><br><small>Current: {{ painting.image_path }}</small>
+                <!-- the `accept="image/*"` restricts standard file explorers to images only -->
+                <input type="file" name="image" class="form-control" accept="image/*" style="padding: 0.6rem;">
+            </div>
+
+            <div class="form-group" style="margin-top: 1rem;">
+                <label class="form-label">Initial Status</label>
+                <select name="status" class="form-control">
+    <option value="available" {% if painting.status == 'available' %}selected{% endif %}>Available</option>
+    <option value="sold" {% if painting.status == 'sold' %}selected{% endif %}>Sold</option>
+    <option value="reserved" {% if painting.status == 'reserved' %}selected{% endif %}>Reserved</option>
+</select>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%; margin-top: 1rem; font-size: 1.1rem;">
+                Add to Gallery <i class="fa-solid fa-sparkles"></i>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

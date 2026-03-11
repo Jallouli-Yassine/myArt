@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-j66qrm6#rv@b#+ehlllo)idbx2nt3h3a%_oo5s%@&dunlvmn@*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'VOTRENOM.pythonanywhere.com']
 
 
 # Application definition
@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'myArt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'artist_gallery', # The name of your database
+        'USER': 'root',           # Your MySQL username (default is often 'root')
+        'PASSWORD': '',           # Your MySQL password (leave blank if you don't use one)
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

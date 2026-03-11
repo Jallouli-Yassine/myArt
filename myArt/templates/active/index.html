@@ -106,28 +106,31 @@
 </head>
 <body>
 
-    {% block content %}
-        <section class="hero container fade-in-up">
-        <div class="hero-content">
-            <h1>Welcome to<br><span>Malek's</span> Dreamy Gallery 🌸</h1>
-            <p>Explore my pastel-infused, Van Gogh-inspired swirl artworks. Every brushstroke tells a sweet, romantic story! ✨💕🎨</p>
-            <div class="buttons">
-                <a href="gallery.html" class="btn btn-primary btn-icon">
-                    <i class="fa-solid fa-palette"></i> View Artworks
-                </a>
-                <a href="contact.html" class="btn btn-secondary btn-icon">
-                    <i class="fa-solid fa-heart"></i> Say Hello
-                </a>
-            </div>
+{% block content %} 
+<section class="hero container fade-in-up">
+    <div class="hero-content">
+        <h1>Welcome to<br><span>Malek's</span> Dreamy Gallery 🌸</h1>
+        <p>Step inside a world of pastel swirls, soft brushstrokes, and tiny stories painted from the heart.  
+        Every artwork here invites you to explore, dream, and enjoy the colors of imagination! ✨💕🎨</p>
+        <div class="buttons">
+            <a href="gallery.html" class="btn btn-primary btn-icon">
+                <i class="fa-solid fa-palette"></i> View Artworks
+            </a>
+            <a href="contact.html" class="btn btn-secondary btn-icon">
+                <i class="fa-solid fa-heart"></i> Say Hello
+            </a>
         </div>
-        
-        <div class="hero-img-container">
-            <div class="hero-decoration"></div>
-            <!-- Starry Night Pink Aesthetic Image Placeholder -->
-            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Romantic Pink Swirl Painting" class="hero-img" style="border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation: float 8s ease-in-out infinite; box-shadow: 0 0 35px rgba(255, 159, 176, 0.5);">
-        </div>
-    </section>
-    {% endblock %}
+    </div>
+    
+    <div class="hero-img-container">
+        <div class="hero-decoration"></div>
+        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+             alt="Romantic Pink Swirl Painting" 
+             class="hero-img" 
+             style="border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation: float 8s ease-in-out infinite; box-shadow: 0 0 35px rgba(255, 159, 176, 0.5);">
+    </div>
+</section>
+{% endblock %}
     <!-- Hero Section -->
 </body>
 </html>

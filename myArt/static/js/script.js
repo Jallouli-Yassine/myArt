@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const jadoreBtns = document.querySelectorAll('.jadore-btn');
   jadoreBtns.forEach(btn => {
     btn.addEventListener('click', function(e) {
-      e.preventDefault(); // In case it's in a link
+      // e.preventDefault(); // Commented out to allow Django to handle the link
       const icon = this.querySelector('i');
       const countSpan = this.querySelector('.like-count');
       
@@ -180,3 +180,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+

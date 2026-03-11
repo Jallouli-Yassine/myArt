@@ -112,31 +112,31 @@
 
 </head>
 <body>
+{% block content %}
+<main class="section container">
+    <div class="text-center fade-in-up" style="margin-bottom: 3rem;">
+        <h1 class="section-title">Hello there! 👋</h1>
+    </div>
 
-        {% block content %}
-    <main class="section container">
-        <div class="text-center fade-in-up" style="margin-bottom: 3rem;">
-            <h1 class="section-title">Hello there! 👋</h1>
+    <div class="about-section">
+        <div class="about-img-container fade-in-up">
+            <div class="about-blob"></div>
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="The Artist at work" 
+                 class="about-img">
         </div>
 
-        <div class="about-section">
-            <div class="about-img-container fade-in-up">
-                <div class="about-blob"></div>
-                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Artist at work" class="about-img">
-            </div>
-
-            <div class="about-content fade-in-up" style="transition-delay: 0.2s;">
-                <div class="bio-card">
-                    <p>Hi, I am <strong>Malek</strong>, a contemporary painter obsessed with expressing emotions through soft, pastel hues.</p>
-                    <p>Since I was a little girl, colors have always been my best friends. I use mostly acrylics, watercolors, and occasionally gouache to build my dreamy little worlds.</p>
-                    <p>My art aims to bring a fleeting sense of comfort, a warm hug in visual form. Thank you for taking the time to stop by my cozy corner of the internet. Let's make the world a cuter place, one painting at a time! 🎨🌸</p>
-                    <div class="signature">With love, Malek</div>
-                </div>
+        <div class="about-content fade-in-up" style="transition-delay: 0.2s;">
+            <div class="bio-card">
+                <p>Hi, I’m <strong>Malek</strong>, a contemporary painter who expresses emotions through pastel swirls, soft brushstrokes, and dreamy compositions.</p>
+                <p>Since childhood, colors have been my companions and inspiration. I work mostly with acrylics, watercolors, and occasionally gouache to create delicate, imaginative worlds.</p>
+                <p>My goal is to bring viewers a sense of calm, joy, and wonder. Thank you for visiting and exploring my art! 🎨🌸</p>
+                <div class="signature">— Malek</div>
             </div>
         </div>
-    </main>
-
-    {% endblock %}
+    </div>
+</main>
+{% endblock %}
 
     <!-- Main Content -->
 

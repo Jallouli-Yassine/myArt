@@ -6,6 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Register | Artist Gallery{% endblock %}</title>
+    {% block extra_css %}
+    <style>
+        .form-group ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .form-group ul li {
+            margin-bottom: 3px;
+        }
+    </style>
+    {% endblock %}
 </head>
 <body>
      {% block content %}
@@ -15,26 +29,26 @@
             <h1 class="section-title" style="margin-bottom: 2rem;">Join the Club ✨</h1>
             
             <div class="auth-card">
-                <form action="profile.html" method="GET">
+                                <form action="" method="POST">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
                     <div class="form-group">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input type="text" id="name" class="form-control" placeholder="Anna Marie" required>
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color: var(--text-muted); font-size: 0.8rem; display:block; margin-top: 5px;">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ error }}</p>
+                        {% endfor %}
                     </div>
+                    {% endfor %}
 
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" id="email" class="form-control" placeholder="hello@example.com" required>
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom: 2.5rem;">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
-                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Account</button>
+
                     <p style="margin-top: 1.5rem; color: var(--text-muted);">
-                        Already have an account? <a href="login.html" style="color: var(--accent-color); font-weight: bold;">Log In</a>
+                        Already have an account? <a href="{% url 'login' %}" style="color: var(--accent-color); font-weight: bold;">Log In</a>
                     </p>
                 </form>
             </div>
@@ -45,6 +59,8 @@
 
 </body>
 </html>
+
+
 
 
 

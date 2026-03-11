@@ -96,54 +96,49 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="user-info">
-                            <div class="user-avatar" style="background: #ffb5a7;"><i class="fa-solid fa-user"></i></div>
-                            <strong>Sophie L.</strong>
-                        </div>
-                    </td>
-                    <td>sophie.lover@example.com</td>
-                    <td>Oct 12, 2023</td>
-                    <td><span class="status-badge status-active">Active</span></td>
-                    <td>
-                        <button class="action-btn view" title="View Profile / Activity"><i class="fa-solid fa-eye"></i></button>
-                        <button class="action-btn ban" title="Ban User"><i class="fa-solid fa-ban"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="user-info">
-                            <div class="user-avatar" style="background: #a2d2ff;"><i class="fa-solid fa-user"></i></div>
-                            <strong>Liam ArtFan</strong>
-                        </div>
-                    </td>
-                    <td>liam.art@example.com</td>
-                    <td>Nov 05, 2023</td>
-                    <td><span class="status-badge status-active">Active</span></td>
-                    <td>
-                        <button class="action-btn view" title="View Profile / Activity"><i class="fa-solid fa-eye"></i></button>
-                        <button class="action-btn ban" title="Ban User"><i class="fa-solid fa-ban"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="user-info">
-                            <div class="user-avatar" style="background: #cdb4db;"><i class="fa-solid fa-user-slash"></i></div>
-                            <strong style="color: var(--text-muted); text-decoration: line-through;">Spammer99</strong>
-                        </div>
-                    </td>
-                    <td>spam.bot@example.com</td>
-                    <td>Dec 01, 2023</td>
-                    <td><span class="status-badge status-banned">Banned</span></td>
-                    <td>
-                        <button class="action-btn view" title="View Profile / Activity"><i class="fa-solid fa-eye"></i></button>
-                        <button class="action-btn" style="color: #bde0fe;" title="Unban User"><i class="fa-solid fa-check-circle"></i></button>
-                    </td>
-                </tr>
-            </tbody>
+                          <tbody>
+                  {% for u in users %}
+                  <tr>
+                      <td>
+                          <div class="user-info">
+                              <div class="user-avatar" style="background: #ffb5a7; min-width:35px; min-height:35px; display:flex; align-items:center; justify-content:center; border-radius:50%; margin-right:10px;"><i class="fa-solid fa-user" style="color:white;"></i></div>
+                              <strong>{{ u.username }}</strong>
+                          </div>
+                      </td>
+                      <td>{{ u.email|default:"No email" }}</td>
+                      <td>{{ u.date_joined|date:"M d, Y" }}</td>
+                      <td>
+                        {% if u.is_superuser %}
+                            <span class="status-badge" style="background-color: #ffd700; color: #b8860b;">Owner/SuperAdmin</span>
+                        {% elif u.is_staff %}
+                            <span class="status-badge" style="background-color: #cce5ff; color: #004085;">Admin</span>
+                        {% else %}
+                            <span class="status-badge status-active">User</span>
+                        {% endif %}
+                      </td>
+                      <td>
+                          {% if not u.is_superuser %}
+                              <form action="{% url 'admin_toggle_admin' u.id %}" method="POST" style="display: inline;">
+                                  {% csrf_token %}
+                                  <button type="submit" class="action-btn edit" title="Toggle Admin Status" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-shield-halved"></i></button>
+                              </form>
+                              <form action="{% url 'admin_delete_user' u.id %}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete user {{ u.username }}?');">
+                                  {% csrf_token %}
+                                  <button type="submit" class="action-btn delete" title="Delete User" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                              </form>
+                          {% else %}
+                              <span style="color:var(--text-muted); font-size:0.8rem;">Protected</span>
+                          {% endif %}
+                      </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                      <td colspan="5" style="text-align:center; padding: 2rem;">No users found!</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
         </table>
     </div>
 </div>
 {% endblock %}
+

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>{% block title %}Pink Cloud Dreams | Artist Gallery{% endblock %}</title>
+<title>{% block title %}{{ painting.title }} | Artist Gallery{% endblock %}</title>
     {% block extra_css %}
         <style>
         .detail-container {
@@ -96,58 +96,61 @@
         {% block content %}
     <main class="section container">
         <!-- Back Button -->
-        <a href="gallery.html" class="btn btn-secondary fade-in-up" style="margin-bottom: 2rem;">
+        <a href="{% url 'gallery' %}" class="btn btn-secondary fade-in-up" style="margin-bottom: 2rem;">
             <i class="fa-solid fa-arrow-left"></i> Back to Gallery
         </a>
 
         <!-- Detail Section -->
         <div class="detail-container fade-in-up">
             <div class="detail-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Pink Cloud Dreams">
+                <img src="{{ painting.image_path }}" alt="{{ painting.title }}">
             </div>
             
             <div class="detail-info">
-                <h1 class="detail-title">Pink Cloud Dreams</h1>
-                <p class="detail-desc">
-                    A beautiful exploration of twilight skies using acrylic on canvas. The soft pastel pinks and dreamy textures were created to evoke a sense of calm and wonder. Inspired by late summer evenings.
-                </p>
-                <button class="big-like-btn jadore-btn">
-                    <i class="fa-regular fa-heart"></i> J'aime (<span class="like-count">124</span>)
-                </button>
+                <h1 class="detail-title">{{ painting.title }}</h1>
+                <p style="font-size: 1.2rem; font-weight: bold; color: var(--accent-color); margin-bottom: 1rem;">{% if painting.price %}${{ painting.price }}{% endif %} - {{ painting.get_category_display }}</p>
+                <p class="detail-desc">{{ painting.description }}</p>
+                <a href="{% url 'like_painting' painting.id %}" style="text-decoration: none;">
+                    {% if request.user.is_authenticated and request.user in painting.likes.all %}
+                    <button class="big-like-btn jadore-btn liked"><i class="fa-solid fa-heart"></i> Je n'aime plus (<span class="like-count">{{ painting.likes.count }}</span>)</button>
+                    {% else %}
+                    <button class="big-like-btn jadore-btn"><i class="fa-regular fa-heart"></i> J'adore (<span class="like-count">{{ painting.likes.count }}</span>)</button>
+                    {% endif %}
+                </a>
             </div>
         </div>
 
         <!-- Comments Section -->
         <section class="comments-section fade-in-up">
-            <h2 class="section-title" style="font-size: 2rem;">Comments (2)</h2>
-            
+            <h2 class="section-title" style="font-size: 2rem;">Comments ({{ painting.comments.count }})</h2>
+
             <div class="comment-box">
                 <div class="comment-avatar"><i class="fa-solid fa-user"></i></div>
                 <div class="comment-input-wrapper">
-                    <form onsubmit="event.preventDefault(); alert('Comment posted! 🌸');">
-                        <textarea class="form-control" rows="3" placeholder="Leave a sweet comment..." required></textarea>
+                    {% if request.user.is_authenticated %}
+                    <form action="{% url 'add_comment' painting.id %}" method="POST">
+                        {% csrf_token %}
+                        <textarea name="body" class="form-control" rows="3" placeholder="Leave a sweet comment..." required></textarea>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Post Comment</button>
                     </form>
+                    {% else %}
+                    <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
+                    {% endif %}
                 </div>
             </div>
 
+            {% for comment in painting.comments.all reversed %}
             <div class="comment">
-                <div class="comment-avatar">A</div>
+                <div class="comment-avatar">{{ comment.user.username|make_list|first|upper }}</div>
                 <div>
-                    <h4 style="margin-bottom: 0.2rem;">Amelie</h4>
-                    <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 0.5rem;">2 days ago</p>
-                    <p>This is so beautiful! The colors make me feel so relaxed. 🌸 Do you sell prints of this?</p>
+                    <h4 style="margin-bottom: 0.2rem;">{{ comment.user.username }}</h4>
+                    <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 0.5rem;">{{ comment.created_at|timesince }} ago</p>
+                    <p>{{ comment.body }}</p>
                 </div>
             </div>
-
-            <div class="comment">
-                <div class="comment-avatar">S</div>
-                <div>
-                    <h4 style="margin-bottom: 0.2rem;">Sophie</h4>
-                    <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 0.5rem;">5 days ago</p>
-                    <p>Absolutely stunning work. The blending in the top right corner is masterful.</p>
-                </div>
-            </div>
+            {% empty %}
+            <p>No comments yet. Be the first to reply!</p>
+            {% endfor %}
         </section>
 
         <!-- Recommendations Slider -->
@@ -207,6 +210,9 @@
 
 </body>
 </html>
+
+
+
 
 
 

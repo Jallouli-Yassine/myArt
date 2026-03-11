@@ -85,7 +85,18 @@
         </aside>
 
         <!-- Main Content Area where different dashboard pages will render -->
-        <section class="admin-content container">
+                <section class="admin-content container">
+            
+            {% if messages %}
+            <div style="margin-bottom: 2rem;">
+                {% for message in messages %}
+                <div style="padding: 1rem; border-radius: 8px; font-weight: bold; {% if message.tags == 'error' %}background-color: #f8d7da; color: #721c24;{% else %}background-color: #d4edda; color: #155724;{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             {% block content %}
             {% endblock %}
         </section>
@@ -94,3 +105,5 @@
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
+
+

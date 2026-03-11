@@ -159,126 +159,38 @@
             <button class="filter-btn">Abstract</button>
         </div>
 
-        <div class="gallery-grid">
-            <!-- Item 1 -->
+<div class="gallery-grid">
+            {% for painting in paintings %}
             <article class="card painting-card fade-in-up">
-                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
-                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pink Cloud Dreams">
+                <a href="{% url 'paintD_view' painting.id %}" class="painting-img-wrapper" style="display: block;">
+                    <!-- Use {{ painting.image_path }} for the image source -->
+                    <img src="{{ painting.image_path }}" alt="{{ painting.title }}">
                 </a>
                 <div class="painting-info">
-                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Pink Cloud Dreams</h3></a>
-                    <p class="painting-desc">Acrylic on canvas. Exploring the softness of twilight skies.</p>
+                    <a href="{% url 'paintD_view' painting.id %}" style="text-decoration: none; color: inherit;">
+                        <h3 class="painting-title">{{ painting.title }}</h3>
+                    </a>
+                    <p class="painting-desc">{{ painting.description }}</p>
                     <div class="painting-actions">
-                        <button class="action-btn jadore-btn">
-                            <i class="fa-regular fa-heart"></i> J'adore
-                        </button>
-                        <button class="action-btn comment-btn" aria-label="Leave a comment">
-                            <i class="fa-regular fa-comment"></i> 12
-                        </button>
+                        <a href="{% url 'like_painting' painting.id %}" style="text-decoration: none; color: inherit;">
+                            {% if request.user.is_authenticated and request.user in painting.likes.all %}
+                            <button class="action-btn jadore-btn liked"><i class="fa-solid fa-heart"></i> Je n'aime plus ({{ painting.likes.count }})</button>
+                            {% else %}
+                            <button class="action-btn jadore-btn"><i class="fa-regular fa-heart"></i> J'adore ({{ painting.likes.count }})</button>
+                            {% endif %}
+                        </a>
                     </div>
                 </div>
             </article>
-
-            <!-- Item 2 -->
-            <article class="card painting-card fade-in-up">
-                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
-                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Soft Botanicals">
-                </a>
-                <div class="painting-info">
-                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Soft Botanicals</h3></a>
-                    <p class="painting-desc">Watercolor study of spring flora blooming in the morning sun.</p>
-                    <div class="painting-actions">
-                        <button class="action-btn jadore-btn">
-                            <i class="fa-regular fa-heart"></i> J'adore
-                        </button>
-                        <button class="action-btn comment-btn" aria-label="Leave a comment">
-                            <i class="fa-regular fa-comment"></i> 5
-                        </button>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Item 3 -->
-            <article class="card painting-card fade-in-up">
-                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
-                    <img src="https://images.unsplash.com/photo-1510425463958-dcced8bd7702?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Morning Tea">
-                </a>
-                <div class="painting-info">
-                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Morning Tea</h3></a>
-                    <p class="painting-desc">A gouache piece capturing the warmth of a quiet morning.</p>
-                    <div class="painting-actions">
-                        <button class="action-btn jadore-btn">
-                            <i class="fa-regular fa-heart"></i> J'adore
-                        </button>
-                        <button class="action-btn comment-btn" aria-label="Leave a comment">
-                            <i class="fa-regular fa-comment"></i> 8
-                        </button>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Item 4 -->
-            <article class="card painting-card fade-in-up">
-                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
-                    <img src="https://images.unsplash.com/photo-1456086272160-b28b0645b729?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Abstract Bloom">
-                </a>
-                <div class="painting-info">
-                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Abstract Bloom</h3></a>
-                    <p class="painting-desc">Mixed media on wood block prioritizing texture and flow.</p>
-                    <div class="painting-actions">
-                        <button class="action-btn jadore-btn">
-                            <i class="fa-regular fa-heart"></i> J'adore
-                        </button>
-                        <button class="action-btn comment-btn" aria-label="Leave a comment">
-                            <i class="fa-regular fa-comment"></i> 24
-                        </button>
-                    </div>
-                </div>
-            </article>
-            
-            <!-- Item 5 -->
-            <article class="card painting-card fade-in-up">
-                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
-                    <img src="https://images.unsplash.com/photo-1518640166948-52fb3ee0d8b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cotton Candy Waves">
-                </a>
-                <div class="painting-info">
-                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Cotton Candy Waves</h3></a>
-                    <p class="painting-desc">Oil painting blending serene ocean vibes with sweet pastels.</p>
-                    <div class="painting-actions">
-                        <button class="action-btn jadore-btn">
-                            <i class="fa-regular fa-heart"></i> J'adore
-                        </button>
-                        <button class="action-btn comment-btn" aria-label="Leave a comment">
-                            <i class="fa-regular fa-comment"></i> 3
-                        </button>
-                    </div>
-                </div>
-            </article>
-            
-            <!-- Item 6 -->
-            <article class="card painting-card fade-in-up">
-                <a href="{% url 'paintD_view' 1 %}" class="painting-img-wrapper" style="display: block;">
-                    <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pastel Dreams">
-                </a>
-                <div class="painting-info">
-                    <a href="{% url 'paintD_view' 1 %}" style="text-decoration: none; color: inherit;"><h3 class="painting-title">Pastel Dreams</h3></a>
-                    <p class="painting-desc">Soft brushstrokes creating a dreamy, abstract atmosphere.</p>
-                    <div class="painting-actions">
-                        <button class="action-btn jadore-btn">
-                            <i class="fa-regular fa-heart"></i> J'adore
-                        </button>
-                        <button class="action-btn comment-btn" aria-label="Leave a comment">
-                            <i class="fa-regular fa-comment"></i> 15
-                        </button>
-                    </div>
-                </div>
-            </article>
+            {% endfor %}
         </div>
     </main>
     {% endblock %}
 
 </body>
 </html>
+
+
 
 
 
