@@ -1,4 +1,6 @@
-{
+import json
+path = r'd:\mm\myArt\vercel.json'
+data = {
     "version": 2,
     "builds": [
         {
@@ -13,3 +15,5 @@
         }
     ]
 }
+with open(path, 'w', encoding='utf-8') as f:
+    json.dump(data, f, indent=4)
