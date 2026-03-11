@@ -26,10 +26,7 @@ SECRET_KEY = 'django-insecure-j66qrm6#rv@b#+ehlllo)idbx2nt3h3a%_oo5s%@&dunlvmn@*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'VOTRENOM.pythonanywhere.com']
-
-
-# Application definition
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.pythonanywhere.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -131,6 +128,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# Required for PythonAnywhere deployment to serve static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
