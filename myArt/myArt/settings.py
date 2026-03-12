@@ -90,8 +90,8 @@ DATABASES = {
     )
 }
 
-
-# Password validation
+if 'OPTIONS' in DATABASES['default'] and 'ssl-mode' in DATABASES['default']['OPTIONS']:
+    DATABASES['default']['OPTIONS']['ssl_mode'] = DATABASES['default']['OPTIONS'].pop('ssl-mode')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
