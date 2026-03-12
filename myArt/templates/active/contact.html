@@ -109,7 +109,18 @@
                 <i class="fa-solid fa-paintbrush decor-2"></i>
             </div>
             
-            <form class="contact-card" action="#" method="POST" onsubmit="event.preventDefault(); alert('Yay! Message sent successfully. 🌸');">
+            {% if messages %}
+            <div class="messages" style="margin-bottom: 20px; text-align: center;">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" style="padding: 15px; border-radius: 8px; background-color: {% if message.tags == 'success' %}#d4edda{% else %}#f8d7da{% endif %}; color: {% if message.tags == 'success' %}#155724{% else %}#721c24{% endif %};">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form class="contact-card" action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="name" class="form-label">Your Name</label>
                     <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required>

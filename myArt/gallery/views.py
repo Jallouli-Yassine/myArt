@@ -4,8 +4,18 @@ from django.contrib.auth.decorators import login_required
 from .models import Painting
 
 def gallery_view(request):
-    paintings = Painting.objects.all()
-    return render(request, 'gallery.html', {'paintings': paintings})
+    category = request.GET.get('category')
+    if category:
+        paintings = Painting.objects.filter(category=category)
+    else:
+        paintings = Painting.objects.all()
+    
+    categories = Painting.CATEGORY_CHOICES
+    return render(request, 'gallery.html', {
+        'paintings': paintings,
+        'categories': categories,
+        'selected_category': category
+    })
 
 def paintD_view(request, id):
     painting = get_object_or_404(Painting, id=id)
