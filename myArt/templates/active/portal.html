@@ -68,7 +68,7 @@
                     msg1.classList.add('active'); 
                     mainIcon.innerHTML = '🤔';
                 }, 800); 
-            }, 3000);
+            }, 4500);
 
             setTimeout(() => { 
                 msg1.classList.remove('active'); 
@@ -78,7 +78,7 @@
                     mainIcon.innerHTML = '✨🖌️';
                     setTimeout(() => { btn.classList.add('active'); }, 1000); 
                 }, 800); 
-            }, 6000);
+            }, 9500);
 
             btn.addEventListener('click', () => { overlay.classList.add('expand'); setTimeout(() => { window.location.href = "{% url 'home' %}"; }, 1500); });
         });
