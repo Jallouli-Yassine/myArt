@@ -153,9 +153,9 @@
 
         <!-- Dynamic Gallery Filter -->
         <div class="category-filter fade-in-up">
-            <a href="{% url 'gallery_view' %}" class="filter-btn {% if not selected_category %}active{% endif %}" style="text-decoration: none;">All</a>
+            <a href="{% url 'gallery' %}" class="filter-btn {% if not selected_category %}active{% endif %}" style="text-decoration: none;">All</a>
             {% for cat_key, cat_name in categories %}
-            <a href="{% url 'gallery_view' %}?category={{ cat_key }}" class="filter-btn {% if selected_category == cat_key %}active{% endif %}" style="text-decoration: none;">{{ cat_name }}</a>
+            <a href="{% url 'gallery' %}?category={{ cat_key }}" class="filter-btn {% if selected_category == cat_key %}active{% endif %}" style="text-decoration: none;">{{ cat_name }}</a>
             {% endfor %}
         </div>
 
