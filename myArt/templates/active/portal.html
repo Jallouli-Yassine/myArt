@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
@@ -18,7 +18,7 @@
         .glass-card { position: relative; z-index: 10; width: 90%; max-width: 600px; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.35); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 30px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.2); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 350px; }
         .icon-top { font-size: 3rem; margin-bottom: 1rem; animation: bounce 3s infinite ease-in-out; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .text-container { position: relative; width: 100%; height: 120px; display: flex; align-items: center; justify-content: center; }
+        .text-container { position: relative; width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; }
         .message { position: absolute; width: 100%; opacity: 0; transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1); transform: translateY(20px); pointer-events: none; }
         .message.active { opacity: 1; transform: translateY(0); pointer-events: all; }
         .message.exit { opacity: 0; transform: translateY(-20px); }
@@ -36,13 +36,13 @@
     <div class='color-blob blob-1'></div><div class='color-blob blob-2'></div><div class='color-blob blob-3'></div>
     <div id='sparkles-container'></div>
     <div class='glass-card'>
-        <div class='icon-top' id='mainIcon'>🍽️✨</div>
+        <div class='icon-top' id='mainIcon'>????</div>
         <div class='text-container'>
             <h2 id='msg0' class='message text-1'>Loading Mome Lounge Menu...</h2>
             <h2 id='msg1' class='message text-1'>Wait a second...</h2>
-            <h1 id='msg2' class='message text-2'>Welcome to Malek's Dreamy Gallery 🌸</h1>
+            <h1 id='msg2' class='message text-2'>Welcome to Malek's Dreamy Gallery ??</h1>
         </div>
-        <button id='enterBtn' class='enter-btn'>🎨 Enter the Gallery</button>
+        <button id='enterBtn' class='enter-btn'>?? Enter the Gallery</button>
     </div>
     <div id='portalOverlay' class='portal-overlay'></div>
     <script>
@@ -66,7 +66,7 @@
                 msg0.classList.add('exit'); 
                 setTimeout(() => { 
                     msg1.classList.add('active'); 
-                    mainIcon.innerHTML = '🤔';
+                    mainIcon.innerHTML = '??';
                 }, 800); 
             }, 3000);
 
@@ -75,7 +75,7 @@
                 msg1.classList.add('exit'); 
                 setTimeout(() => { 
                     msg2.classList.add('active'); 
-                    mainIcon.innerHTML = '✨🖌️';
+                    mainIcon.innerHTML = '????';
                     setTimeout(() => { btn.classList.add('active'); }, 1000); 
                 }, 800); 
             }, 6000);
@@ -85,3 +85,4 @@
     </script>
 </body>
 </html>
+

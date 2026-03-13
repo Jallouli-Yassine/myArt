@@ -18,6 +18,21 @@
             margin-top: 2rem;
         }
 
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .category-filter {
+                gap: 0.5rem;
+                margin-bottom: 2rem;
+            }
+            .filter-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
         @media (min-width: 1200px) {
             .gallery-grid {
                 grid-template-columns: repeat(4, 1fr);

@@ -76,6 +76,7 @@
         .buttons {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap; /* important for mobile! */
         }
 
         @media (max-width: 900px) {
@@ -100,6 +101,24 @@
                 max-width: 90%;
             }
         }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            .buttons a {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
     </style>
     {% endblock %}
 
@@ -113,10 +132,10 @@
         <p>Step inside a world of pastel swirls, soft brushstrokes, and tiny stories painted from the heart.  
         Every artwork here invites you to explore, dream, and enjoy the colors of imagination! ✨💕🎨</p>
         <div class="buttons">
-            <a href="gallery.html" class="btn btn-primary btn-icon">
+            <a href="{% url 'gallery' %}" class="btn btn-primary btn-icon">
                 <i class="fa-solid fa-palette"></i> View Artworks
             </a>
-            <a href="contact.html" class="btn btn-secondary btn-icon">
+            <a href="{% url 'contact' %}" class="btn btn-secondary btn-icon">
                 <i class="fa-solid fa-heart"></i> Say Hello
             </a>
         </div>
