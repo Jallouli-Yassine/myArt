@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+﻿from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
@@ -26,12 +26,17 @@ def contact(request):
                 [settings.EMAIL_HOST_USER] if hasattr(settings, 'EMAIL_HOST_USER') and settings.EMAIL_HOST_USER else ['admin@myart.com'],
                 fail_silently=False,
             )
-            messages.success(request, 'Yay! Message sent successfully. 🌸')
+            messages.success(request, 'Yay! Message sent successfully. ðŸŒ¸')
         except Exception as e:
             # Fallback if SMTP isn't configured yet
             print(f"Email failed to send: {e}")
-            messages.success(request, 'Yay! Message recorded successfully! (Emails will work magically once SMTP is added to your environment variables) 🌸')
+            messages.success(request, 'Yay! Message recorded successfully! (Emails will work magically once SMTP is added to your environment variables) ðŸŒ¸')
             
         return redirect('contact')
         
     return render(request, 'contact.html')
+
+
+def portal(request):
+    return render(request, 'portal.html')
+

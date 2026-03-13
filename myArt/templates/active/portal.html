@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Magical Portal</title>
+    <link href='https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap' rel='stylesheet'>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; width: 100%; overflow: hidden; font-family: 'Poppins', sans-serif; background-color: #fdfaf6; display: flex; align-items: center; justify-content: center; position: relative; }
+        .color-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; animation: swirl 20s infinite alternate ease-in-out; z-index: 0; }
+        .blob-1 { width: 500px; height: 500px; background: #ffb6c1; top: -100px; left: -100px; animation-duration: 25s; }
+        .blob-2 { width: 600px; height: 600px; background: #e0b0ff; bottom: -200px; right: -100px; animation-duration: 22s; animation-direction: alternate-reverse; }
+        .blob-3 { width: 450px; height: 450px; background: #ffe4e1; top: 20%; left: 40%; animation-duration: 28s; }
+        @keyframes swirl { 0% { transform: translate(0, 0) rotate(0deg) scale(1); } 33% { transform: translate(100px, 50px) rotate(45deg) scale(1.2); } 66% { transform: translate(-50px, 150px) rotate(-30deg) scale(0.8); } 100% { transform: translate(0, 0) rotate(0deg) scale(1); } }
+        .sparkle { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); animation: twinkle float linear infinite; z-index: 1; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.2); } }
+        .glass-card { position: relative; z-index: 10; width: 90%; max-width: 600px; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.35); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 30px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.2); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 350px; }
+        .icon-top { font-size: 3rem; margin-bottom: 1rem; animation: bounce 3s infinite ease-in-out; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .text-container { position: relative; width: 100%; height: 120px; display: flex; align-items: center; justify-content: center; }
+        .message { position: absolute; width: 100%; opacity: 0; transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1); transform: translateY(20px); pointer-events: none; }
+        .message.active { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .message.exit { opacity: 0; transform: translateY(-20px); }
+        .text-1 { font-weight: 300; font-size: 1.4rem; color: #7b6b83; letter-spacing: 1px; }
+        .text-2 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #d17a94; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7); line-height: 1.2; }
+        .enter-btn { margin-top: 2rem; padding: 1rem 2.5rem; font-size: 1.2rem; font-family: 'Poppins', sans-serif; font-weight: 600; color: white; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4); opacity: 0; transform: scale(0.9) translateY(20px); transition: all 0.5s ease; pointer-events: none; }
+        .enter-btn.active { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
+        .enter-btn:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 15px 25px rgba(255, 154, 158, 0.6); background: linear-gradient(135deg, #fecfef 0%, #ff9a9e 100%); }
+        .portal-overlay { position: fixed; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: conic-gradient(from 0deg, #ffb6c1, #e0b0ff, #ffe4e1, #ffb6c1); z-index: 100; transform: translate(-50%, -50%) rotate(0deg); opacity: 0; pointer-events: none; transition: width 1.5s ease-in, height 1.5s ease-in, opacity 0.5s ease, transform 2s ease; }
+        .portal-overlay.expand { width: 300vw; height: 300vw; opacity: 1; transform: translate(-50%, -50%) rotate(360deg); }
+        @media (max-width: 600px) { .text-2 { font-size: 2.2rem; } .text-1 { font-size: 1.1rem; } .glass-card { padding: 2rem 1rem; } }
+    </style>
+</head>
+<body>
+    <div class='color-blob blob-1'></div><div class='color-blob blob-2'></div><div class='color-blob blob-3'></div>
+    <div id='sparkles-container'></div>
+    <div class='glass-card'>
+        <div class='icon-top'>✨🖌️</div>
+        <div class='text-container'>
+            <h2 id='msg1' class='message text-1'>Someone built a gallery for your art...</h2>
+            <h1 id='msg2' class='message text-2'>Welcome to Malek's Dreamy Gallery 🌸</h1>
+        </div>
+        <button id='enterBtn' class='enter-btn'>🎨 Enter the Gallery</button>
+    </div>
+    <div id='portalOverlay' class='portal-overlay'></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sc = document.getElementById('sparkles-container');
+            for(let i=0; i<15; i++) {
+                let s = document.createElement('div');
+                s.classList.add('sparkle');
+                s.style.top = Math.random() * 100 + 'vh';
+                s.style.left = Math.random() * 100 + 'vw';
+                let size = Math.random() * 4 + 2; s.style.width = size + 'px'; s.style.height = size + 'px';
+                s.style.animationDelay = (Math.random() * 3) + 's'; s.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                sc.appendChild(s);
+            }
+            const msg1 = document.getElementById('msg1'), msg2 = document.getElementById('msg2'), btn = document.getElementById('enterBtn'), overlay = document.getElementById('portalOverlay');
+            setTimeout(() => { msg1.classList.add('active'); }, 500);
+            setTimeout(() => { msg1.classList.remove('active'); msg1.classList.add('exit'); setTimeout(() => { msg2.classList.add('active'); setTimeout(() => { btn.classList.add('active'); }, 1000); }, 800); }, 3000);
+            btn.addEventListener('click', () => { overlay.classList.add('expand'); setTimeout(() => { window.location.href = "{% url 'home' %}"; }, 1500); });
+        });
+    </script>
+</body>
+</html>
