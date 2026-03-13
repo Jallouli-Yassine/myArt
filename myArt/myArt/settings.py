@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'gallery',
     'pages',
     'accounts',
@@ -134,6 +136,9 @@ STATICFILES_DIRS = [
 # Required for PythonAnywhere deployment to serve static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -148,7 +153,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Cloudinary configurations 
 CLOUDINARY_STORAGE = {
@@ -156,8 +168,6 @@ CLOUDINARY_STORAGE = {
     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET')
 }
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 
 # Email Settings (Configure these in Render Env Variables)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
