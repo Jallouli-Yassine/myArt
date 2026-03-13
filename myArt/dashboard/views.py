@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+﻿from django.shortcuts import render, redirect, get_object_or_404
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 import os
@@ -30,10 +30,10 @@ def add_painting(request):
         
         image_path = None
         if 'image' in request.FILES:
-            fs = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'static', 'images')) 
+            from django.core.files.storage import default_storage
             uploaded_file = request.FILES['image']
-            filename = fs.save(uploaded_file.name, uploaded_file)
-            image_path = f'/static/images/{filename}'
+            filename = default_storage.save(f"paintings/{uploaded_file.name}", uploaded_file)
+            image_path = default_storage.url(filename)
         else:
             image_path = request.POST.get('image')
 
@@ -61,10 +61,10 @@ def edit_painting(request, id):
         painting.status = request.POST.get('status')
         
         if 'image' in request.FILES:
-            fs = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'static', 'images')) 
+            from django.core.files.storage import default_storage
             uploaded_file = request.FILES['image']
-            filename = fs.save(uploaded_file.name, uploaded_file)
-            painting.image_path = f'/static/images/{filename}'
+            filename = default_storage.save(f"paintings/{uploaded_file.name}", uploaded_file)
+            painting.image_path = default_storage.url(filename)
         elif request.POST.get('image'):
              painting.image_path = request.POST.get('image')
 
@@ -111,3 +111,4 @@ def toggle_admin(request, id):
     else:
         messages.error(request, 'Cannot change superuser permissions from here!')
     return redirect('admin_users')
+
